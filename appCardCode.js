@@ -2,8 +2,9 @@ $(document).ready(function() {
 let animationTimelines = new Map();
 
 function animateStepZero(stepZero) {
-      const stepZeroTl = gsap.timeline();
-      stepZeroTl.fromTo(stepZero, {x:'0%'}, 	{x:'-200%',ease:"steps(2)",duration: 1}); 
+      const stepZeroTl = gsap.timeline({delay:0.5});
+      stepZeroTl.fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
+      stepZeroTl.fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
       return stepZeroTl;
 }
