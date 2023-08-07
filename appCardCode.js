@@ -159,6 +159,11 @@ function appSlides() {
       speed: 600,
       autoplay: true,
       interval: 5000,
+      breakpoints: {
+           767: { // Settings for screen widths up to 767 pixels
+      autoplay: false
+    }
+  }
       });
       
       
