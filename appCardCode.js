@@ -119,7 +119,7 @@ function animateStepFive(stepFive) {
     .fromTo(".apply-circle__outer-gradient", { attr: { r: 98 } }, { attr: { r: 127.4 }, duration: 1.25, ease: "expo.out" })
     .fromTo(".apply-circle__overlap", { scale: 0.5, transformOrigin: "103px 103px" }, { scale: 1.5, transformOrigin: "103px 103px", duration: 1.25, ease: "expo.out" }, "<")
     .set(".apply-circle__outer-gradient, .apply-circle__overlap", { opacity: 0 }, "-=1")
-    .to(video, {onStart: function() {video.play();},  /* onReverseComplete: function() {video.pause(); video.currentTime = 0;},*/ duration: video.duration}, "-=1.5");
+    .to(video, {onStart: function() {video.currentTime = 0; video.play();},  /* onReverseComplete: function() {video.pause(); video.currentTime = 0;},*/ duration: video.duration}, "-=1.5");
 
  stepSixTl
     .fromTo(".apply-circle__outer", { drawSVG: 0 }, { drawSVG: true, ease: "power2.in", duration: 0.5 })
