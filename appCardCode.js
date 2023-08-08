@@ -118,7 +118,18 @@ function animateStepFive(stepFive) {
     .fromTo(".apply-circle__outer-gradient", { attr: { r: 98 } }, { attr: { r: 127.4 }, duration: 1.25, ease: "expo.out" })
     .fromTo(".apply-circle__overlap", { scale: 0.5, transformOrigin: "103px 103px" }, { scale: 1.5, transformOrigin: "103px 103px", duration: 1.25, ease: "expo.out" }, "<")
     .set(".apply-circle__outer-gradient, .apply-circle__overlap", { opacity: 0 }, "-=1")
-    .to(video, {onStart: function() {video.play();},   onReverseComplete: function() {video.pause(); video.currentTime = 0;}, duration: video.duration}, "-=1.5");
+    .to(video, {
+        onStart: function() {
+            video.play().catch(error => {
+                console.error("Video play in GSAP timeline failed due to", error);
+            });
+        },
+        onReverseComplete: function() {
+            video.pause();
+            video.currentTime = 0;
+        },
+        duration: video.duration
+    }, "-=1.5");
 
  stepSixTl
     .fromTo(".apply-circle__outer", { drawSVG: 0 }, { drawSVG: true, ease: "power2.in", duration: 0.5 })
@@ -169,17 +180,13 @@ function appSlides() {
       
 splideInstance.on('moved', function(newIndex, oldIndex) {
     var confettiVideo = document.getElementById('confettiVid');
-    if (confettiVideo) {
-        if (newIndex === 6) {
-            if (confettiVideo.paused) { // Check if video is paused
-                confettiVideo.play().catch(error => {
-                    console.error("Video play failed due to", error);
-                });
-            }
-        } else if (oldIndex === 6) {
+   if (confettiVideo && newIndex === 6) {
+        // Try to play and immediately pause to preload the video
+        confettiVideo.play().then(() => {
             confettiVideo.pause();
-            confettiVideo.currentTime = 0;
-        }
+        }).catch(error => {
+            console.error("Video preloading failed due to", error);
+        });
     }
 });
 splideInstance.on('active', function(slide) {
