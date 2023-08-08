@@ -1,5 +1,13 @@
 $(document).ready(function() {
 let animationTimelines = new Map();
+      // Play, then pause and reset the video immediately after the page loads
+const confettiVideo = document.getElementById('confettiVid');
+if (confettiVideo) {
+    confettiVideo.play().then(() => {
+        confettiVideo.pause();
+        confettiVideo.currentTime = 0;
+    });
+}
 
 function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline({delay:1});
@@ -180,19 +188,12 @@ function appSlides() {
       
 splideInstance.on('moved', function(newIndex, oldIndex) {
     var confettiVideo = document.getElementById('confettiVid');
-   if (confettiVideo && newIndex === 6) {
-        // Try to play and immediately pause to preload the video
-        confettiVideo.play().then(() => {
-            confettiVideo.pause();
-        }).catch(error => {
-            console.error("Video preloading failed due to", error);
-        });
-    }
         // Restart video if we're moving AWAY from slide 7
-        else if (oldIndex === 6) {
+        if (confettiVideo && oldIndex === 6) {
             confettiVideo.currentTime = 0;
-    }
-});
+        }
+    });
+        
 splideInstance.on('active', function(slide) {
   const activeStep = slide.slide.querySelector('.step');
   const activeTimeline = animationTimelines.get(activeStep.id);
