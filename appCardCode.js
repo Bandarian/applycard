@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    var videoElement = document.getElementById('confettiVid');
+    var mp4Source = document.getElementById('mp4Source');
+    var webmSource = document.getElementById('webmSource');
+
+    if (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1) {
+        videoElement.removeChild(webmSource);
+    } else {
+    }
+    videoElement.load();
+      
 let animationTimelines = new Map();
 
 function animateStepZero(stepZero) {
