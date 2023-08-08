@@ -128,9 +128,7 @@ function animateStepFive(stepFive) {
     .set(".apply-circle__outer-gradient, .apply-circle__overlap", { opacity: 0 }, "-=1")
     .to(video, {
         onStart: function() {
-            video.play().catch(error => {
-                console.error("Video play in GSAP timeline failed due to", error);
-            });
+           video.currentTime = 0; // Reset to the start, but don't play it here
         },
         onReverseComplete: function() {
             video.pause();
