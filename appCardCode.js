@@ -191,10 +191,15 @@ splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
             // Pause and reset the video before playing again
             console.log('Pausing and resetting video time');
             confettiVideo.pause();
-            confettiVideo.currentTime = 0;
+             
+            // Point 3: Resetting the Video's Source
+            var currentSrc = confettiVideo.currentSrc;
+            confettiVideo.src = '';
+            confettiVideo.src = currentSrc;
 
             // Now attempt to play 
             console.log('Attempting to play video');
+            confettiVideo.playbackRate = 1.01;
             confettiVideo.play().then(() => {
                 console.log('Video played successfully, now pausing');
                 confettiVideo.pause();
