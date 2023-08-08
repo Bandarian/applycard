@@ -1,16 +1,8 @@
 $(document).ready(function() {
 let animationTimelines = new Map();
-      // Play, then pause and reset the video immediately after the page loads
-const confettiVideo = document.getElementById('confettiVid');
-if (confettiVideo) {
-    confettiVideo.play().then(() => {
-        confettiVideo.pause();
-        confettiVideo.currentTime = 0;
-    });
-}
 
 function animateStepZero(stepZero) {
-      const stepZeroTl = gsap.timeline({delay:1});
+      const stepZeroTl = gsap.timeline({delay:2});
       stepZeroTl.fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
       stepZeroTl.fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
@@ -126,19 +118,7 @@ function animateStepFive(stepFive) {
     .fromTo(".apply-circle__outer-gradient", { attr: { r: 98 } }, { attr: { r: 127.4 }, duration: 1.25, ease: "expo.out" })
     .fromTo(".apply-circle__overlap", { scale: 0.5, transformOrigin: "103px 103px" }, { scale: 1.5, transformOrigin: "103px 103px", duration: 1.25, ease: "expo.out" }, "<")
     .set(".apply-circle__outer-gradient, .apply-circle__overlap", { opacity: 0 }, "-=1")
-    .to(video, {
-        onStart: function() {
-           video.currentTime = 0; // Reset to the start, but don't play it here
-            video.play().catch(error => {
-                  console.error("Video play in GSAP timeline failed due to", error);
-            });
-        },
-        onReverseComplete: function() {
-            video.pause();
-            video.currentTime = 0;
-        },
-        duration: video.duration
-    }, "-=1.5");
+    .to(video, {onStart: function() {video.play();},   onReverseComplete: function() {video.pause(); video.currentTime = 0;}, duration: video.duration}, "-=1.5");
 
  stepSixTl
     .fromTo(".apply-circle__outer", { drawSVG: 0 }, { drawSVG: true, ease: "power2.in", duration: 0.5 })
@@ -164,7 +144,9 @@ return stepSixTimeline;
 const stepSix= document.getElementById('stepSix');
   animateStepSix(stepSix);
   
-
+const confettiVideo = document.getElementById('confettiVid');
+ console.log(confettiVideo);
+  
 function appSlides() {
   let splides = $('#applySplide');
   for (let i = 0, splideLength = splides.length; i < splideLength; i++) {
@@ -185,18 +167,33 @@ function appSlides() {
       });
       
       
-splideInstance.on('moved', function(newIndex, oldIndex) {
-    var confettiVideo = document.getElementById('confettiVid');
-        // Restart video if we're moving AWAY from slide 7
-        if (confettiVideo && oldIndex === 6) {
+splideInstance.on( 'moved', function( newIndex, oldIndex, destIndex ) {
+if (oldIndex === 6) {
+var confettiVideo = document.getElementById('confettiVid');
+
+       if (confettiVideo) {
+            // Attempt to play and immediately pause to preload the video
+            confettiVideo.play().then(() => {
+                confettiVideo.pause();
+                confettiVideo.currentTime = 0;
+            });
+        }
+    }
+    
+    if (oldIndex === 6) {
+        var confettiVideo = document.getElementById('confettiVid');
+        if (confettiVideo) {
+            confettiVideo.pause();
             confettiVideo.currentTime = 0;
         }
-    });
+    }
+});
         
 splideInstance.on('active', function(slide) {
   const activeStep = slide.slide.querySelector('.step');
   const activeTimeline = animationTimelines.get(activeStep.id);
-     if (activeTimeline && typeof activeTimeline.restart === 'function') {
+  
+  if (activeTimeline && typeof activeTimeline.restart === 'function') {
     activeTimeline.restart();
   }
   
