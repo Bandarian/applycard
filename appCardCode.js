@@ -191,7 +191,6 @@ splideInstance.on('moved', function(newIndex, oldIndex) {
         // Restart video if we're moving AWAY from slide 7
         else if (oldIndex === 6) {
             confettiVideo.currentTime = 0;
-        }
     }
 });
 splideInstance.on('active', function(slide) {
