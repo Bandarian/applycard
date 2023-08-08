@@ -129,6 +129,9 @@ function animateStepFive(stepFive) {
     .to(video, {
         onStart: function() {
            video.currentTime = 0; // Reset to the start, but don't play it here
+            video.play().catch(error => {
+                  console.error("Video play in GSAP timeline failed due to", error);
+            });
         },
         onReverseComplete: function() {
             video.pause();
