@@ -163,9 +163,7 @@ return stepSixTimeline;
 const stepSix= document.getElementById('stepSix');
   animateStepSix(stepSix);
   
-const confettiVideo = document.getElementById('confettiVid');
- console.log(confettiVideo);
-  
+
 function appSlides() {
   let splides = $('#applySplide');
   for (let i = 0, splideLength = splides.length; i < splideLength; i++) {
