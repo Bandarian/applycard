@@ -193,6 +193,11 @@ splideInstance.on('moved', function(newIndex, oldIndex) {
 splideInstance.on('active', function(slide) {
   const activeStep = slide.slide.querySelector('.step');
   const activeTimeline = animationTimelines.get(activeStep.id);
+          if (activeStep.id === 'stepSix' && confettiVideo) {
+        confettiVideo.play().catch(error => {
+            console.error("Video play in Splide active event failed due to", error);
+        });
+    }
   
   if (activeTimeline && typeof activeTimeline.restart === 'function') {
     activeTimeline.restart();
