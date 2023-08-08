@@ -158,83 +158,89 @@ const confettiVideo = document.getElementById('confettiVid');
     });
 }
   
-function appSlides() {
-  let splides = $('#applySplide');
-  for (let i = 0, splideLength = splides.length; i < splideLength; i++) {
-    const splideInstance = new Splide(splides[i], {
-      perPage: 1,
-      rewind: true,
-      type: 'fade',
-      arrows: false,
-      pagination: true,
-      speed: 600,
-      autoplay: true,
-      interval: 5000,
-      breakpoints: {
-           767: { // Settings for screen widths up to 767 pixels
-      autoplay: false
-    }
-  }
-      });
-      
-      
-splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
-    console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
+   function appSlides() {
+        // Using jQuery selector directly for Splide initialization
+        const splideInstance = new Splide('#applySplide', {
+            perPage: 1,
+            rewind: true,
+            type: 'fade',
+            arrows: false,
+            pagination: true,
+            speed: 600,
+            autoplay: true,
+            interval: 5000,
+            breakpoints: {
+                767: { // Settings for screen widths up to 767 pixels
+                    autoplay: false
+                }
+            }
+        });
 
-    if (oldIndex === 6) {
-        var confettiVideo = document.getElementById('confettiVid');
-        console.log('Attempting to handle video on slide 6');
+        splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
+            console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
 
-        if (confettiVideo) {
-            console.log('Found confetti video for slide 6');
+            if (oldIndex === 6) {
+                handleConfettiVideo();
+            }
+        });
 
-            // Pause and reset the video before playing again
-            console.log('Pausing and resetting video time');
-            confettiVideo.pause();
-             
-            // Point 3: Resetting the Video's Source
-            var currentSrc = confettiVideo.currentSrc;
-            confettiVideo.src = '';
-            confettiVideo.src = currentSrc;
+        function handleConfettiVideo() {
+            var confettiVideo = document.getElementById('confettiVid');
+            console.log('Attempting to handle video on slide 6');
 
-            // Now attempt to play 
-            console.log('Attempting to play video');
-            confettiVideo.playbackRate = 1.01;
-            confettiVideo.play().then(() => {
-                console.log('Video played successfully, now pausing');
+            if (confettiVideo) {
+                console.log('Found confetti video for slide 6');
+
+                // Pause and reset the video before playing again
+                console.log('Pausing and resetting video time');
                 confettiVideo.pause();
-                confettiVideo.currentTime = 0;
-            }).catch(error => {
-                console.error('Error playing video:', error);
-            });
-        } else {
-            console.warn('Did not find confetti video for slide 6');
+
+                // Resetting the Video's Source
+                var currentSrc = confettiVideo.currentSrc;
+                confettiVideo.src = '';
+                confettiVideo.src = currentSrc;
+
+                // Now attempt to play 
+                console.log('Attempting to play video');
+                confettiVideo.playbackRate = 1.01;
+                confettiVideo.play().then(() => {
+                    console.log('Video played successfully, now pausing');
+                    confettiVideo.pause();
+                    confettiVideo.currentTime = 0;
+                }).catch(error => {
+                    console.error('Error playing video:', error);
+                });
+            } else {
+                console.warn('Did not find confetti video for slide 6');
+            }
         }
+
+        splideInstance.on('active', function(slide) {
+            console.log(`Splide active event: index=${slide.index}`);
+            handleActiveSlide(slide);
+        });
+
+        function handleActiveSlide(slide) {
+            const activeStep = slide.slide.querySelector('.step');
+            const activeTimeline = animationTimelines.get(activeStep.id);
+
+            if (activeTimeline && typeof activeTimeline.restart === 'function') {
+                activeTimeline.restart();
+            }
+
+            const totalSlides = splideInstance.length;
+            const currentIndex = slide.index;
+            const progressPercentage = 10 + (currentIndex / (totalSlides - 1)) * 90;
+            gsap.to('#progCurtain', { width: `${progressPercentage}%`, duration: 0.5, ease: 'power1.out' });
+
+            const times = ['9:41', '9:42', '9:45', '9:46', '9:48', '9:50', '9:52'];
+            if (times[currentIndex]) {
+                document.getElementById('timeText').innerText = times[currentIndex];
+            }
+        }
+
+        splideInstance.mount();
     }
-});
-        
-splideInstance.on('active', function(slide) {
-     console.log(`Splide active event: index=${slide.index}`);
-  const activeStep = slide.slide.querySelector('.step');
-  const activeTimeline = animationTimelines.get(activeStep.id);
-  
-  if (activeTimeline && typeof activeTimeline.restart === 'function') {
-    activeTimeline.restart();
-  }
-  
-  const totalSlides = splideInstance.length;
-  const currentIndex = slide.index;
-  const progressPercentage = 10 + (currentIndex / (totalSlides - 1)) * 90;
-  gsap.to('#progCurtain', { width: `${progressPercentage}%`, duration: 0.5, ease: 'power1.out' });
 
-  const times = ['9:41', '9:42', '9:45', '9:46', '9:48', '9:50', '9:52'];
-  if (times[currentIndex]) {
-    document.getElementById('timeText').innerText = times[currentIndex];
-  }
-});
-    splideInstance.mount();
-  }
-}
-
-appSlides();
+    appSlides();
 });
