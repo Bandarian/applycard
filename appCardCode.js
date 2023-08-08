@@ -2,7 +2,7 @@ $(document).ready(function() {
 let animationTimelines = new Map();
 
 function animateStepZero(stepZero) {
-      const stepZeroTl = gsap.timeline({delay:1});
+      const stepZeroTl = gsap.timeline({delay:2});
       stepZeroTl.fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
       stepZeroTl.fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
@@ -170,12 +170,25 @@ function appSlides() {
 splideInstance.on( 'moved', function( newIndex, oldIndex, destIndex ) {
 if (oldIndex === 6) {
 var confettiVideo = document.getElementById('confettiVid');
-if (confettiVideo) {
-confettiVideo.pause();
-confettiVideo.currentTime = 0;
-  }
- }
+
+       if (confettiVideo) {
+            // Attempt to play and immediately pause to preload the video
+            confettiVideo.play().then(() => {
+                confettiVideo.pause();
+                confettiVideo.currentTime = 0;
+            });
+        }
+    }
+    
+    if (oldIndex === 6) {
+        var confettiVideo = document.getElementById('confettiVid');
+        if (confettiVideo) {
+            confettiVideo.pause();
+            confettiVideo.currentTime = 0;
+        }
+    }
 });
+        
 splideInstance.on('active', function(slide) {
   const activeStep = slide.slide.querySelector('.step');
   const activeTimeline = animationTimelines.get(activeStep.id);
