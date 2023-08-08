@@ -147,6 +147,16 @@ const stepSix= document.getElementById('stepSix');
   
 const confettiVideo = document.getElementById('confettiVid');
  console.log(confettiVideo);
+
+     if (confettiVideo) {
+    confettiVideo.play().then(() => {
+        console.log('Video Played Successfully');
+        confettiVideo.pause();
+        confettiVideo.currentTime = 0;
+    }).catch(err => {
+        console.error('Error playing the video:', err);
+    });
+}
   
 function appSlides() {
   let splides = $('#applySplide');
@@ -168,29 +178,38 @@ function appSlides() {
       });
       
       
-splideInstance.on( 'moved', function( newIndex, oldIndex, destIndex ) {
-if (oldIndex === 6) {
-var confettiVideo = document.getElementById('confettiVid');
+splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
+    console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
 
-       if (confettiVideo) {
-            // Attempt to play and immediately pause to preload the video
-            confettiVideo.play().then(() => {
-                confettiVideo.pause();
-                confettiVideo.currentTime = 0;
-            });
-        }
-    }
-    
     if (oldIndex === 6) {
         var confettiVideo = document.getElementById('confettiVid');
+        console.log('Attempting to handle video on slide 6');
+
         if (confettiVideo) {
+            console.log('Found confetti video for slide 6');
+
+            // Pause and reset the video before playing again
+            console.log('Pausing and resetting video time');
             confettiVideo.pause();
             confettiVideo.currentTime = 0;
+
+            // Now attempt to play 
+            console.log('Attempting to play video');
+            confettiVideo.play().then(() => {
+                console.log('Video played successfully, now pausing');
+                confettiVideo.pause();
+                confettiVideo.currentTime = 0;
+            }).catch(error => {
+                console.error('Error playing video:', error);
+            });
+        } else {
+            console.warn('Did not find confetti video for slide 6');
         }
     }
 });
         
 splideInstance.on('active', function(slide) {
+     console.log(`Splide active event: index=${slide.index}`);
   const activeStep = slide.slide.querySelector('.step');
   const activeTimeline = animationTimelines.get(activeStep.id);
   
