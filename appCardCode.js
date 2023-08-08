@@ -181,7 +181,7 @@ function appSlides() {
 splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
     console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
 
-    if (oldIndex === 6) {
+   /* if (oldIndex === 6) {
         var confettiVideo = document.getElementById('confettiVid');
         console.log('Attempting to handle video on slide 6');
 
@@ -205,7 +205,7 @@ splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
         } else {
             console.warn('Did not find confetti video for slide 6');
         }
-    }
+    }*/
 });
         
 splideInstance.on('active', function(slide) {
