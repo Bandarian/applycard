@@ -4,7 +4,7 @@ let animationTimelines = new Map();
 
 function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline();
-      stepZeroTl.delay(2)
+      stepZeroTl.fromTo(stepZero, {x:'0%'}, 	{x:'0%',ease:"steps(1)",duration: 1})
                 .fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
                 .fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
