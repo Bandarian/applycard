@@ -188,6 +188,11 @@ splideInstance.on('moved', function(newIndex, oldIndex) {
             console.error("Video preloading failed due to", error);
         });
     }
+        // Restart video if we're moving AWAY from slide 7
+        else if (oldIndex === 6) {
+            confettiVideo.currentTime = 0;
+        }
+    }
 });
 splideInstance.on('active', function(slide) {
   const activeStep = slide.slide.querySelector('.step');
