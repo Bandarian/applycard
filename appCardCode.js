@@ -4,7 +4,7 @@ let animationTimelines = new Map();
 
 function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline();
-      stepZeroTl.fromTo(".apply-card-house", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
+      stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
 /*.fromTo(stepZero, {x:'0%'}, 	{x:'0%',ease:"steps(1)",duration: 1})
 .fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
 .fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); */
