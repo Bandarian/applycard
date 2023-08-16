@@ -2,15 +2,15 @@ $(document).ready(function() {
      
 let animationTimelines = new Map();
 
-function animateStepZero(stepZero) {
+/*function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline();
       stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
 /*.fromTo(stepZero, {x:'0%'}, 	{x:'0%',ease:"steps(1)",duration: 1})
 .fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
-.fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); */
+.fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
       return stepZeroTl;
-}
+}*/
 
 const stepZero = document.getElementById('stepZero');
   animateStepZero(stepZero);
@@ -228,14 +228,17 @@ splideInstance.on('active', function(slide) {
   if (times[currentIndex]) {
     document.getElementById('timeText').innerText = times[currentIndex];
   }
-     if (currentIndex === 0) {
-      const lottieElement = document.querySelector('#house-lottie');
-      if (lottieElement && window.Webflow) {
-        Webflow.require('lottie').createInstance(lottieElement);
-            lottieInstance.setDirection(1);  // Ensure the animation plays forward
-            lottieInstance.goToAndPlay(0);   // Reset the animation to the beginning and start playing
-      }
-    }
+  const lottieElement = document.querySelector('#house-lottie');
+  if (lottieElement && window.Webflow) {
+  
+  const lottieInstance = Webflow.require('lottie').createInstance(lottieElement);
+    if (currentIndex === 0) {
+    lottieInstance.setDirection(1); 
+    lottieInstance.goToAndPlay(0); 
+  } else {
+    lottieInstance.goToAndStop(0, true);
+  }
+}
 });
     splideInstance.mount();
   }
