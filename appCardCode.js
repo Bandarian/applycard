@@ -229,9 +229,11 @@ splideInstance.on('active', function(slide) {
     document.getElementById('timeText').innerText = times[currentIndex];
   }
      if (currentIndex === 0) {
-      const lottieElement = document.querySelector('.house-lottie');
+      const lottieElement = document.querySelector('#house-lottie');
       if (lottieElement && window.Webflow) {
-        Webflow.require('lottie').createInstance(lottieElement).play();
+        Webflow.require('lottie').createInstance(lottieElement);
+            lottieInstance.setDirection(1);  // Ensure the animation plays forward
+            lottieInstance.goToAndPlay(0);   // Reset the animation to the beginning and start playing
       }
     }
 });
