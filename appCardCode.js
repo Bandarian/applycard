@@ -5,7 +5,7 @@ let animationTimelines = new Map();
 /*function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline();
       stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
-/*.fromTo(stepZero, {x:'0%'}, 	{x:'0%',ease:"steps(1)",duration: 1})
+.fromTo(stepZero, {x:'0%'}, 	{x:'0%',ease:"steps(1)",duration: 1})
 .fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
 .fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
@@ -230,8 +230,7 @@ splideInstance.on('active', function(slide) {
   }
   const lottieElement = document.querySelector('#house-lottie');
   if (lottieElement && window.Webflow) {
-  
-  const lottieInstance = Webflow.require('lottie').createInstance(lottieElement);
+    const lottieInstance = Webflow.require('lottie').createInstance(lottieElement);
     if (currentIndex === 0) {
     lottieInstance.setDirection(1); 
     lottieInstance.goToAndPlay(0); 
