@@ -13,7 +13,7 @@ function animateStepZero(stepZero) {
 }
 
 const stepZero = document.getElementById('stepZero');
-  animateStepZero(stepZero);*/
+  animateStepZero(stepZero);
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({ yoyo: true, repeat: 1, ease: "power2.inOut" });
