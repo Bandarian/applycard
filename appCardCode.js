@@ -10,10 +10,10 @@ let animationTimelines = new Map();
 .fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); 
       animationTimelines.set('stepZero', stepZeroTl);
       return stepZeroTl;
-}*/
+}
 
 const stepZero = document.getElementById('stepZero');
-  animateStepZero(stepZero);
+  animateStepZero(stepZero);*/
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({ yoyo: true, repeat: 1, ease: "power2.inOut" });
