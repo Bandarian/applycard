@@ -228,6 +228,12 @@ splideInstance.on('active', function(slide) {
   if (times[currentIndex]) {
     document.getElementById('timeText').innerText = times[currentIndex];
   }
+     if (currentIndex === 0) {
+      const lottieElement = document.querySelector('.house-lottie');
+      if (lottieElement && window.Webflow) {
+        Webflow.require('lottie').createInstance(lottieElement).play();
+      }
+    }
 });
     splideInstance.mount();
   }
