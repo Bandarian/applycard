@@ -2,24 +2,15 @@ $(document).ready(function() {
      
 let animationTimelines = new Map();
 
-  function animateStepZero(stepZero) {
-    const stepZeroTl = gsap.timeline({ paused: true });
-    stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%', duration: 1, stagger: 0.75, delay: 0.5});
-    animationTimelines.set('stepZero', stepZeroTl);
-    return stepZeroTl;
-  }
+function animateStepZero(stepZero) {
+      const stepZeroTl = gsap.timeline({ paused: true });
+      stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
+      animationTimelines.set('stepZero', stepZeroTl);
+      return stepZeroTl;
+}
 
-  const stepZero = document.getElementById('stepZero');
-  const stepZeroTimeline = animateStepZero(stepZero);
-
-  ScrollTrigger.create({
-    trigger: "#stepZero",
-    start: "top 80%",
-    onEnter: () => {
-      stepZeroTimeline.play();
-    },
-    once: true,
-  });
+const stepZero = document.getElementById('stepZero');
+  animateStepZero(stepZero);
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({ yoyo: true, repeat: 1, ease: "power2.inOut" });
