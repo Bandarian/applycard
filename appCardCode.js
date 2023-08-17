@@ -5,9 +5,6 @@ let animationTimelines = new Map();
 function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline();
       stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
-/*.fromTo(stepZero, {x:'0%'}, 	{x:'0%',ease:"steps(1)",duration: 1})
-.fromTo(stepZero, {x:'0%'}, 	{x:'-100%',ease:"steps(1)",duration: .5})
-.fromTo(stepZero, {x:'-100%'}, 	{x:'-200%',ease:"steps(1)",duration: .5},"+=1"); */
       animationTimelines.set('stepZero', stepZeroTl);
       return stepZeroTl;
 }
@@ -147,19 +144,6 @@ return stepSixTimeline;
 const stepSix= document.getElementById('stepSix');
   animateStepSix(stepSix);
   
-/*const confettiVideo = document.getElementById('confettiVid');
- console.log(confettiVideo);
-
-     if (confettiVideo) {
-    confettiVideo.play().then(() => {
-        console.log('Video Played Successfully');
-        confettiVideo.pause();
-        confettiVideo.currentTime = 0;
-    }).catch(err => {
-        console.error('Error playing the video:', err);
-    });
-}*/
-  
 function appSlides() {
   let splides = $('#applySplide');
   for (let i = 0, splideLength = splides.length; i < splideLength; i++) {
@@ -170,45 +154,31 @@ function appSlides() {
       arrows: false,
       pagination: true,
       speed: 600,
-      autoplay: true,
+      autoplay: false,
       interval: 5000,
       breakpoints: {
-           767: { // Settings for screen widths up to 767 pixels
+           767: { 
       autoplay: false
     }
   }
       });
-      
+
+ScrollTrigger.create({
+  trigger: '#applySplide', // replace with the ID or class of your slider element
+  onEnter: () => {
+    splideInstance.options = { autoplay: true };
+    splideInstance.play(); // start the autoplay
+  },
+  onLeaveBack: () => {
+    splideInstance.options = { autoplay: false };
+    splideInstance.pause(); // stop the autoplay
+  },
+});
       
 splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
     console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
 
-   /* if (oldIndex === 6) {
-        var confettiVideo = document.getElementById('confettiVid');
-        console.log('Attempting to handle video on slide 6');
-
-        if (confettiVideo) {
-            console.log('Found confetti video for slide 6');
-
-            // Pause and reset the video before playing again
-            console.log('Pausing and resetting video time');
-            confettiVideo.pause();
-            confettiVideo.currentTime = 0;
-
-            // Now attempt to play 
-            console.log('Attempting to play video');
-            confettiVideo.play().then(() => {
-                console.log('Video played successfully, now pausing');
-                confettiVideo.pause();
-                confettiVideo.currentTime = 0;
-            }).catch(error => {
-                console.error('Error playing video:', error);
-            });
-        } else {
-            console.warn('Did not find confetti video for slide 6');
-        }
-    }*/
-});
+ });
         
 splideInstance.on('active', function(slide) {
      console.log(`Splide active event: index=${slide.index}`);
