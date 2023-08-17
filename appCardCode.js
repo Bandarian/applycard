@@ -2,10 +2,16 @@ $(document).ready(function() {
      
 let animationTimelines = new Map();
 
-      // Create an animation timeline for stepZero
-  const stepZeroTimeline = animateStepZero(document.getElementById('stepZero'));
+  function animateStepZero(stepZero) {
+    const stepZeroTl = gsap.timeline({ paused: true });
+    stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%', duration: 1, stagger: 0.75, delay: 0.5});
+    animationTimelines.set('stepZero', stepZeroTl);
+    return stepZeroTl;
+  }
 
-  // Use ScrollTrigger to trigger the first animation when in view
+  const stepZero = document.getElementById('stepZero');
+  const stepZeroTimeline = animateStepZero(stepZero);
+
   ScrollTrigger.create({
     trigger: "#stepZero",
     start: "top 80%",
@@ -14,16 +20,6 @@ let animationTimelines = new Map();
     },
     once: true,
   });
-
-function animateStepZero(stepZero) {
-      const stepZeroTl = gsap.timeline({ paused: true });
-      stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
-      animationTimelines.set('stepZero', stepZeroTl);
-      return stepZeroTl;
-}
-
-const stepZero = document.getElementById('stepZero');
-  animateStepZero(stepZero);
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({ yoyo: true, repeat: 1, ease: "power2.inOut" });
