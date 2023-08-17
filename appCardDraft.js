@@ -9,8 +9,18 @@ function animateStepZero(stepZero) {
       return stepZeroTl;
 }
 
-const stepZero = document.getElementById('stepZero');
-  animateStepZero(stepZero);
+  const stepZero = document.getElementById('stepZero');
+  const stepZeroTimeline = animateStepZero(stepZero);
+
+       // Use ScrollTrigger to trigger the first animation when in view
+  ScrollTrigger.create({
+    trigger: "#stepZero",
+    start: "top 80%",
+    onEnter: () => {
+      // Remove the play() call here
+    },
+    once: true,
+  });
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({ yoyo: true, repeat: 1, ease: "power2.inOut" });
