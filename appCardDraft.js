@@ -17,7 +17,7 @@ function animateStepZero(stepZero) {
     trigger: "#stepZero",
     start: "top 80%",
     onEnter: () => {
-      // Remove the play() call here
+      stepZeroTimeline.play();
     },
     once: true,
   });
