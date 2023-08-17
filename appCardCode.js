@@ -167,11 +167,11 @@ ScrollTrigger.create({
   trigger: '#applySplide', // replace with the ID or class of your slider element
   onEnter: () => {
     splideInstance.options = { autoplay: true };
-    splideInstance.play(); // start the autoplay
+    splideInstance.refresh(); // start the autoplay
   },
   onLeaveBack: () => {
     splideInstance.options = { autoplay: false };
-    splideInstance.pause(); // stop the autoplay
+    splideInstance.refresh(); // stop the autoplay
   },
 });
       
