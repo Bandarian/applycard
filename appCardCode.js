@@ -12,11 +12,11 @@ let animationTimelines = new Map();
     onEnter: () => {
       stepZeroTimeline.play();
     },
-    once: true, // Play the animation only once when it enters the trigger range
+    once: true,
   });
 
 function animateStepZero(stepZero) {
-      const stepZeroTl = gsap.timeline();
+      const stepZeroTl = gsap.timeline({ paused: true });
       stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
       animationTimelines.set('stepZero', stepZeroTl);
       return stepZeroTl;
