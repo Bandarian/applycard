@@ -165,7 +165,7 @@ function appSlides() {
       autoplay: false
     }
   }
-      });
+
 
 splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
     console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
