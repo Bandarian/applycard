@@ -191,7 +191,7 @@ splideInstance.on('active', function(slide) {
   if (times[currentIndex]) {
     document.getElementById('timeText').innerText = times[currentIndex];
   }
-  const lottieElement = document.querySelector('#house-lottie');
+  /*const lottieElement = document.querySelector('#house-lottie');
   if (lottieElement && window.Webflow) {
     const lottieInstance = Webflow.require('lottie').createInstance(lottieElement);
     if (currentIndex === 0) {
@@ -200,7 +200,7 @@ splideInstance.on('active', function(slide) {
   } else {
     lottieInstance.goToAndStop(0, true);
   }
-}
+}*/
 });
     splideInstance.mount(window.splide.Extensions );
   }
