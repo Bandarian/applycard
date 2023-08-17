@@ -2,6 +2,19 @@ $(document).ready(function() {
      
 let animationTimelines = new Map();
 
+      // Create an animation timeline for stepZero
+  const stepZeroTimeline = animateStepZero(document.getElementById('stepZero'));
+
+  // Use ScrollTrigger to trigger the first animation when in view
+  ScrollTrigger.create({
+    trigger: "#stepZero",
+    start: "top 80%",
+    onEnter: () => {
+      stepZeroTimeline.play();
+    },
+    once: true, // Play the animation only once when it enters the trigger range
+  });
+
 function animateStepZero(stepZero) {
       const stepZeroTl = gsap.timeline();
       stepZeroTl.fromTo(".apply-house-fade", {opacity:'0%'}, {opacity:'100%',duration: 1, stagger:0.75, delay:0.5})
