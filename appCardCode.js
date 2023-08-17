@@ -154,8 +154,12 @@ function appSlides() {
       arrows: false,
       pagination: true,
       speed: 600,
-      autoplay: false,
       interval: 5000,
+      autoplay: 'pause',
+       intersection: {
+         inView: {
+          autoplay: true,
+       },
       breakpoints: {
            767: { 
       autoplay: false
@@ -163,18 +167,6 @@ function appSlides() {
   }
       });
 
-ScrollTrigger.create({
-  trigger: '#applySplide', // replace with the ID or class of your slider element
-  onEnter: () => {
-    splideInstance.options = { autoplay: true };
-    splideInstance.refresh(); // start the autoplay
-  },
-  onLeaveBack: () => {
-    splideInstance.options = { autoplay: false };
-    splideInstance.refresh(); // stop the autoplay
-  },
-});
-      
 splideInstance.on('moved', function(newIndex, oldIndex, destIndex) {
     console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
 
@@ -209,7 +201,7 @@ splideInstance.on('active', function(slide) {
   }
 }
 });
-    splideInstance.mount();
+    splideInstance.mount(window.splide.Extensions );
   }
 }
 
