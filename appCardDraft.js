@@ -1,3 +1,5 @@
+console.log("Custom script loaded successfully!");
+
 $(document).ready(function () {
   const applyCardOdo = document.getElementById("applyCardOdo");
   if (!applyCardOdo) {
