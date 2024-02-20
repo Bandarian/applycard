@@ -1,24 +1,24 @@
-console.log("Custom script loaded successfully!");
-
 $(document).ready(function () {
   const applyCardOdo = document.getElementById("applyCardOdo");
   if (!applyCardOdo) {
     console.log("Element with ID 'applyCardOdo' not found. Aborting script.");
     return; // Exit the script if the element is not found
   }
+  console.log("Custom script loaded successfully!");
 
   let animationTimelines = new Map();
 
   function animateStepZero(stepZero) {
+    console.log('Animating Step Zero');
   const odometerElement = stepZero.querySelector(".custom-odometer");
-  const startValue = 0;
+  const startValue = 100000;
   const endValue = 600000;
 
   const odometer = new Odometer({
     el: odometerElement,
     value: startValue,
-    format: '$,ddd.dd',
-    theme: 'default', // Use a default theme
+    format: '(,ddd).dd',
+    theme: 'default',
   });
 
   odometer.render();
