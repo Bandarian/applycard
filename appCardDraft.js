@@ -8,8 +8,7 @@ $(document).ready(function () {
 
   let animationTimelines = new Map();
 
-  function animateStepZero(stepZero) {
-    console.log('Animating Step Zero');
+function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".custom-odometer");
   const startValue = 100000;
   const endValue = 600000;
@@ -17,24 +16,25 @@ $(document).ready(function () {
   const odometer = new Odometer({
     el: odometerElement,
     value: startValue,
-    format: '(,ddd).dd',
+    format: '$,ddd.dd',
     theme: 'default',
   });
 
   odometer.render();
+  odometer.update(endValue); // Set the final value immediately
 
-  const stepZeroTl = gsap.timeline({
-    onComplete: function () {
-      odometer.update(endValue);
+  const stepZeroTl = {
+    restart: function () {
+      // Add any additional logic if needed
+      console.log("Step Zero animation restarted");
     },
-  });
-
-  animationTimelines.set("stepZero", stepZeroTl);
+  };
   return stepZeroTl;
 }
 
 const stepZero = document.getElementById("stepZero");
 animateStepZero(stepZero);
+  
   function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
       yoyo: true,
