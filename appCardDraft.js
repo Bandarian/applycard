@@ -1,7 +1,7 @@
 $(document).ready(function () {
-  const applyCard = document.getElementById("applyCard");
-  if (!applyCard) {
-    console.log("Element with ID 'applyCard' not found. Aborting script.");
+  const applyCardOdo = document.getElementById("applyCardOdo");
+  if (!applyCardOdo) {
+    console.log("Element with ID 'applyCardOdo' not found. Aborting script.");
     return; // Exit the script if the element is not found
   }
 
