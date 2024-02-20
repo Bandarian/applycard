@@ -17,7 +17,7 @@ $(document).ready(function () {
   const odometer = new Odometer({
     el: odometerElement,
     value: startValue,
-    format: '$(,ddd).dd',
+    format: '$,ddd.dd',
     theme: 'default', // Use a default theme
   });
 
