@@ -18,40 +18,15 @@ function animateStepZero(stepZero) {
     theme: 'default',
   });
 
-odometer.update(600000);
-
- // Apply gradient using pseudo-element
-  applyDigitGradient(odometerElement);
+  odometer.update(600000);
 
   return odometer; // Return the odometer instance
 }
-  
-function applyDigitGradient(odometerElement) {
-  const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
-
-  const gradientColors = ["#ff7bad", "#ff8e94", "#ff9e7e", "#ffac69", "#ffb45d", "#ffc940"];
-
-  digitSpans.forEach((span, index) => {
-    span.style.position = "relative";
-
-    // Create a pseudo-element for the gradient overlay
-    const pseudoElement = document.createElement("span");
-    pseudoElement.className = "gradient-overlay";
-    
-    // Apply a unique gradient color to each digit
-    const colorIndex = index % gradientColors.length;
-    pseudoElement.style.background = `linear-gradient(to right, ${gradientColors[colorIndex]}, ${gradientColors[colorIndex]})`;
-    
-    // Append the pseudo-element to the span
-    span.appendChild(pseudoElement);
-  });
-}
-
-
 const stepZero = document.getElementById("stepZero");
 const odometerInstance = animateStepZero(stepZero);
   
-  function animateStepOne(stepOne) {
+
+function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
       yoyo: true,
       repeat: 1,
