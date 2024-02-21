@@ -7,11 +7,11 @@ $(document).ready(function () {
   console.log("Custom script loaded successfully!");
 
   let animationTimelines = new Map();
-  let countDirection = 1; // 1 for counting up, -1 for counting down
+  let countDirection = 1;
 
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
-  const odoWrapGsap = stepZero.querySelector(".odo-wrap-gsap"); // Add the class name of the div you want to animate
+  const odoWrapGsap = stepZero.querySelector(".odo-wrap-gsap"); 
 
   const odometer = new Odometer({
     el: odometerElement,
@@ -20,20 +20,16 @@ function animateStepZero(stepZero) {
     theme: 'default',
   });
 
+  // GSAP animation for .odo-wrap-gsap
+  const gsapAnimation = gsap.from(odoWrapGsap,  { width: 0,  duration: 1, ease: "power2.out", delay: 2000 });
+  
   odometer.update(600000);
 
-    // GSAP animation for .odod-wrap-gsap
-  gsap.fromTo(
-    odoWrapGsap,
-    { width: 0 },
-    { width: "100%", duration: 1, ease: "power2.out", delay:2000 }
-  );
-  
-  return odometer; // Return the odometer instance
-
+return { odometer, gsapAnimation }; 
 }
+  
 const stepZero = document.getElementById("stepZero");
-const odometerInstance = animateStepZero(stepZero);
+const { odometer, gsapAnimation } = animateStepZero(stepZero);
  
   function updateOdometerValue() {
     if (countDirection === 1) {
@@ -323,7 +319,7 @@ function animateStepOne(stepOne) {
 
       splideInstance.on("moved", function (newIndex, oldIndex, destIndex) {
          if (newIndex === 0) {
-          // Moved to the first slide
+          gsapAnimation.restart();
           countDirection = 1; // Set direction to count up
           updateOdometerValue();
         } else {
