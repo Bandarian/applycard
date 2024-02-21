@@ -29,7 +29,7 @@ return { odometer, gsapAnimation };
 }
   
 const stepZero = document.getElementById("stepZero");
-const { odometer, gsapAnimation } = animateStepZero(stepZero);
+const { odometerInstance, gsapAnimation } = animateStepZero(stepZero);
  
   function updateOdometerValue() {
     if (countDirection === 1) {
