@@ -19,9 +19,6 @@ function animateStepZero(stepZero) {
   });
 
   odometer.update(600000);
-
-    // Add a custom class to the odometer value element
-  odometerElement.querySelector(".odometer-value").classList.add("gradient-colors");
   
   return odometer; // Return the odometer instance
 
@@ -317,7 +314,13 @@ function animateStepOne(stepOne) {
         if (activeTimeline && typeof activeTimeline.restart === "function") {
           activeTimeline.restart();
         }
-
+      
+      // Restart Odometer animation for stepZero
+      if (activeStep.id === "stepZero") {
+        odometerInstance.reset(); // Assuming Odometer has a reset method
+        odometerInstance.start();
+      }
+        
         const totalSlides = splideInstance.length;
         const currentIndex = slide.index;
         const progressPercentage = 10 + (currentIndex / (totalSlides - 1)) * 90;
