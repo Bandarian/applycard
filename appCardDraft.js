@@ -25,7 +25,16 @@ odometer.update(600000);
 
   return odometer; // Return the odometer instance
 }
-
+function overrideFontFamily() {
+  const odometerStyle = document.createElement("style");
+  odometerStyle.innerHTML = `
+    .odometer-auto-theme .odometer {
+      font-family: 'Inter', sans-serif !important;
+    }
+  `;
+  document.head.appendChild(odometerStyle);
+}
+  
 function applyDigitGradient(odometerElement) {
   const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
 
@@ -37,7 +46,10 @@ function applyDigitGradient(odometerElement) {
     // Create a pseudo-element for the gradient overlay
     const pseudoElement = document.createElement("span");
     pseudoElement.className = "gradient-overlay";
-    pseudoElement.style.background = `linear-gradient(to right, ${gradientColors.join(",")})`;
+    
+    // Apply a unique gradient color to each digit
+    const colorIndex = index % gradientColors.length;
+    pseudoElement.style.background = `linear-gradient(to right, ${gradientColors[colorIndex]}, ${gradientColors[colorIndex]})`;
     
     // Append the pseudo-element to the span
     span.appendChild(pseudoElement);
