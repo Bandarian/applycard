@@ -11,7 +11,13 @@ $(document).ready(function () {
 
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
-  const odoWrapGsap = stepZero.querySelector(".odo-wrap-gsap"); // Add the class name of the div you want to animate
+  const odoWrapGsap = stepZero.querySelector(".odo-wrap-gsap");
+
+  const stepZeroTl = gsap.timeline({
+    ease: "power2.inOut",
+  });
+
+  stepZeroTl.fromTo(odoWrapGsap, { width: 0 }, { width: "100%", duration: 1, ease: "power1.out", delay: 2000 });
 
   const odometer = new Odometer({
     el: odometerElement,
@@ -20,22 +26,21 @@ function animateStepZero(stepZero) {
     theme: 'default',
   });
 
-      // GSAP animation for .odod-wrap-gsap
-  gsap.from(odoWrapGsap, { width: 0, duration: 1, ease: "power2.out", delay:2000 });
-  
   odometer.update(600000);
 
-  return odometer; // Return the odometer instance
+  animationTimelines.set("stepZero", stepZeroTl);
 
+  return odometer; // Return the odometer instance
 }
+
 const stepZero = document.getElementById("stepZero");
 const odometerInstance = animateStepZero(stepZero);
- 
-  function updateOdometerValue() {
-    if (countDirection === 1) {
-      odometerInstance.update(600000);
-    } else {
-       setTimeout(() => {
+
+function updateOdometerValue() {
+  if (countDirection === 1) {
+    odometerInstance.update(600000);
+  } else {
+    setTimeout(() => {
       odometerInstance.update(100000);
     }, 300); // Adjust the delay time as needed
   }
