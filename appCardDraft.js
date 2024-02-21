@@ -12,7 +12,7 @@ $(document).ready(function () {
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
 
-  const odometer = new Odometer({
+  const odometerInstance = new Odometer({
     el: odometerElement,
     value: 100000,
     format: ',ddd',
@@ -314,6 +314,7 @@ function animateStepOne(stepOne) {
       splideInstance.on("moved", function (newIndex, oldIndex, destIndex) {
          if (newIndex === 0) {
           // Moved to the first slide
+          countDirection = 1; // Set direction to count up
           updateOdometerValue();
         } else {
           // Moved away from the first slide
