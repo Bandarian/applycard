@@ -10,37 +10,20 @@ $(document).ready(function () {
 
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
-  const startValue = 100000;
-  const endValue = 600000;
 
   const odometer = new Odometer({
     el: odometerElement,
-    value: startValue,
+    value: 100000,
     format: ',ddd',
     theme: 'default',
   });
 
-  odometer.render();
-
-  // Update odometer value immediately without animation
-  updateOdometer(endValue);
-
+  odometer.update(600000);
   return odometer; // Return the odometer instance
 }
 
 const stepZero = document.getElementById("stepZero");
 const odometerInstance = animateStepZero(stepZero);
-
-// Custom function to update Odometer value
-function updateOdometer(value) {
-  const odometerElement = document.querySelector(".odometer");
-  if (odometerElement) {
-    odometerElement.innerHTML = value.toLocaleString();
-  }
-
-  // Update the odometer value using its update method
-  odometerInstance.update(value);
-}
   
   function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
