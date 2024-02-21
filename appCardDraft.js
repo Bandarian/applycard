@@ -17,7 +17,10 @@ function animateStepZero(stepZero) {
     format: ',ddd',
     theme: 'default',
   });
-
+odometerElement.style.background = 'linear-gradient(to right, #ff7bad, #ffc940)';
+odometerElement.style.webkitBackgroundClip = 'text';
+odometerElement.style.webkitTextFillColor = 'transparent';
+  
   odometer.update(600000);
   return odometer; // Return the odometer instance
 }
