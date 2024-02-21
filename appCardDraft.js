@@ -12,7 +12,7 @@ $(document).ready(function () {
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
 
-  const odometerInstance = new Odometer({
+  const odometer = new Odometer({
     el: odometerElement,
     value: 100000,
     format: ',ddd',
