@@ -1,4 +1,4 @@
-$(document).ready(function () {
+y$(document).ready(function () {
   const applyCardOdo = document.getElementById("applyCardOdo");
   if (!applyCardOdo) {
     console.log("Element with ID 'applyCardOdo' not found. Aborting script.");
@@ -16,7 +16,7 @@ function animateStepZero(stepZero) {
   const stepZeroTl = gsap.timeline({
     ease: "power2.inOut",
   });
-   stepZeroTl.fromTo(odoWrapGsap, { width: 0 }, { width: "100%", duration: 1, ease: "power1.out",});
+   stepZeroTl.fromTo(odoWrapGsap, { width: 0 }, { width: "100%", duration: 1, ease: "power1.out", delay:2});
 
   const odometer = new Odometer({
     el: odometerElement,
