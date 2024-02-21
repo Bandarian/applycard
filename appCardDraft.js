@@ -32,10 +32,10 @@ function animateStepZero(stepZero) {
 
   function updateOdometerValue() {
   if (countDirection === 1) {
-    odometerInstance.update(600000);
+    odometer.update(600000);
   } else {
     setTimeout(() => {
-      odometerInstance.update(100000);
+      odometer.update(100000);
     }, 300); // Adjust the delay time as needed
   }
 }
