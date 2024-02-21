@@ -40,11 +40,15 @@ function animateStepZero(stepZero) {
   }
 }
 
-  return odometer; // Return the odometer instance
+    return {
+      odometer,
+      updateOdometerValue,
+      stepZeroTl
+    }; // Return the odometer instance
 }
 
 const stepZero = document.getElementById("stepZero");
-const odometerInstance = animateStepZero(stepZero);
+const { odometer, updateOdometerValue, stepZeroTl } = animateStepZero(stepZero);
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
