@@ -17,7 +17,16 @@ function animateStepZero(stepZero) {
     format: ',ddd',
     theme: 'default',
   });
-  
+  // Get individual span elements within the odometer
+const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
+
+// Define gradient colors
+const gradientColors = ["#ff7bad", "#ff8e94", "#ff9e7e", "#ffac69", "#ffb45d", "#ffc940"]; // Add more colors as needed
+
+// Apply gradient colors to each span
+digitSpans.forEach((span, index) => {
+  span.style.color = gradientColors[index % gradientColors.length];
+});
   odometer.update(600000);
   return odometer; // Return the odometer instance
 }
