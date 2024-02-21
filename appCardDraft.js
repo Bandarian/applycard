@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
-  const ododWrapGsap = stepZero.querySelector(".odod-wrap-gsap"); // Add the class name of the div you want to animate
+  const odoWrapGsap = stepZero.querySelector(".odo-wrap-gsap"); // Add the class name of the div you want to animate
 
   const odometer = new Odometer({
     el: odometerElement,
@@ -24,7 +24,7 @@ function animateStepZero(stepZero) {
 
     // GSAP animation for .odod-wrap-gsap
   gsap.fromTo(
-    ododWrapGsap,
+    odoWrapGsap,
     { width: 0 },
     { width: "100%", duration: 1, ease: "power2.out", delay:2000 }
   );
