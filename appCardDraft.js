@@ -280,6 +280,7 @@ function animateStepOne(stepOne) {
 
   function appSlides() {
     let splides = $("#applySplide");
+    let odometerInstance; // Define Odometer instance outside the loop
     for (let i = 0, splideLength = splides.length; i < splideLength; i++) {
       const splideInstance = new Splide(splides[i], {
         perPage: 1,
@@ -303,7 +304,21 @@ function animateStepOne(stepOne) {
       });
 
       splideInstance.on("moved", function (newIndex, oldIndex, destIndex) {
-        // console.log(`Splide moved event: newIndex=${newIndex}, oldIndex=${oldIndex}, destIndex=${destIndex}`);
+        if (newIndex === 0) {
+        if (!odometerInstance) {
+          odometerInstance = new Odometer({
+            el: document.querySelector(".odometer"), // Replace with your actual selector
+            value: 100000, // Set your initial value
+            format: ',ddd',
+            theme: 'default',
+          });
+          odometerInstance.render();
+        } else {
+          // If Odometer instance exists, reset to the initial value
+          odometerInstance.update(100000);
+        }
+      }
+       
       });
 
       splideInstance.on("active", function (slide) {
@@ -315,12 +330,6 @@ function animateStepOne(stepOne) {
           activeTimeline.restart();
         }
       
-      // Restart Odometer animation for stepZero
-      if (activeStep.id === "stepZero") {
-        odometerInstance.reset(); // Assuming Odometer has a reset method
-        odometerInstance.start();
-      }
-        
         const totalSlides = splideInstance.length;
         const currentIndex = slide.index;
         const progressPercentage = 10 + (currentIndex / (totalSlides - 1)) * 90;
