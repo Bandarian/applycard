@@ -1,4 +1,4 @@
-y$(document).ready(function () {
+$(document).ready(function () {
   const applyCardOdo = document.getElementById("applyCardOdo");
   if (!applyCardOdo) {
     console.log("Element with ID 'applyCardOdo' not found. Aborting script.");
