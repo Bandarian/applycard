@@ -25,15 +25,6 @@ odometer.update(600000);
 
   return odometer; // Return the odometer instance
 }
-function overrideFontFamily() {
-  const odometerStyle = document.createElement("style");
-  odometerStyle.innerHTML = `
-    .odometer-auto-theme .odometer {
-      font-family: 'Inter', sans-serif !important;
-    }
-  `;
-  document.head.appendChild(odometerStyle);
-}
   
 function applyDigitGradient(odometerElement) {
   const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
