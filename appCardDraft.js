@@ -19,7 +19,7 @@ function animateStepZero(stepZero) {
   });
 
   // Get individual span elements within the odometer
-  const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
+  const digitSpans = odometerElement.querySelectorAll(".odometer-value span");
 
   // Define gradient colors
   const gradientColors = ["#ff7bad", "#ff8e94", "#ff9e7e", "#ffac69", "#ffb45d", "#ffc940"]; // Add more colors as needed
