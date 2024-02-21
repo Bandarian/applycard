@@ -27,7 +27,7 @@ function animateStepZero(stepZero) {
   // Apply gradient colors to each span
   digitSpans.forEach((span, index) => {
     const colorIndex = index % gradientColors.length;
-    span.style.color = gradientColors[colorIndex];
+    span.style.color = gradientColors[colorIndex] + " !important";
   });
 
   odometer.update(600000);
