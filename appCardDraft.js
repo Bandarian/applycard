@@ -19,18 +19,23 @@ function animateStepZero(stepZero) {
   });
 
 odometer.update(600000);
-  // Get individual span elements within the odometer
-const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
 
-// Define gradient colors
+const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
 const gradientColors = ["#ff7bad", "#ff8e94", "#ff9e7e", "#ffac69", "#ffb45d", "#ffc940"]; // Add more colors as needed
 
-// Apply gradient colors to each span
 digitSpans.forEach((span, index) => {
-  span.style.color = gradientColors[index % gradientColors.length];
-});
+    const gradientColor = gradientColors[index % gradientColors.length];
+    span.style.color = gradientColor;
+  });
+
+odometer.options.onAnimationEnd = function () {
+    digitSpans.forEach((span, index) => {
+      const gradientColor = gradientColors[index % gradientColors.length];
+      span.style.color = gradientColor;
+    });
+  };
   
-  return odometer; // Return the odometer instance
+  return odometer;
 }
 
 const stepZero = document.getElementById("stepZero");
