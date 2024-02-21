@@ -30,13 +30,7 @@ function animateStepZero(stepZero) {
 
   animationTimelines.set("stepZero", stepZeroTl);
 
-  return odometer; // Return the odometer instance
-}
-
-const stepZero = document.getElementById("stepZero");
-const odometerInstance = animateStepZero(stepZero);
-
-function updateOdometerValue() {
+  function updateOdometerValue() {
   if (countDirection === 1) {
     odometerInstance.update(600000);
   } else {
@@ -45,6 +39,12 @@ function updateOdometerValue() {
     }, 300); // Adjust the delay time as needed
   }
 }
+
+  return odometer; // Return the odometer instance
+}
+
+const stepZero = document.getElementById("stepZero");
+const odometerInstance = animateStepZero(stepZero);
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
