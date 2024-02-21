@@ -16,7 +16,7 @@ function animateStepZero(stepZero) {
   const stepZeroTl = gsap.timeline({
     ease: "power2.inOut",
   });
-   stepZeroTl.fromTo(odoWrapGsap, { width: 0 }, { width: "100%", duration: 1, ease: "power1.out", delay: 2000 });
+   stepZeroTl.fromTo(odoWrapGsap, { width: 0 }, { width: "100%", duration: 1, ease: "power1.out",});
 
   const odometer = new Odometer({
     el: odometerElement,
