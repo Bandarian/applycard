@@ -35,6 +35,7 @@ const odometerInstance = animateStepZero(stepZero);
       odometerInstance.update(100000);
     }, 500); // Adjust the delay time as needed
   }
+}
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
