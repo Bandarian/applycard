@@ -31,8 +31,9 @@ const odometerInstance = animateStepZero(stepZero);
     if (countDirection === 1) {
       odometerInstance.update(600000);
     } else {
+       setTimeout(() => {
       odometerInstance.update(100000);
-    }
+    }, 500); // Adjust the delay time as needed
   }
 
 function animateStepOne(stepOne) {
