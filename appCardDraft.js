@@ -33,7 +33,7 @@ const odometerInstance = animateStepZero(stepZero);
     } else {
        setTimeout(() => {
       odometerInstance.update(100000);
-    }, 500); // Adjust the delay time as needed
+    }, 200); // Adjust the delay time as needed
   }
 }
 
