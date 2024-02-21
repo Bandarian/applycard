@@ -7,6 +7,7 @@ $(document).ready(function () {
   console.log("Custom script loaded successfully!");
 
   let animationTimelines = new Map();
+  let countDirection = 1; // 1 for counting up, -1 for counting down
 
 function animateStepZero(stepZero) {
   const odometerElement = stepZero.querySelector(".odometer");
@@ -25,7 +26,14 @@ function animateStepZero(stepZero) {
 }
 const stepZero = document.getElementById("stepZero");
 const odometerInstance = animateStepZero(stepZero);
-  
+ 
+  function updateOdometerValue() {
+    if (countDirection === 1) {
+      odometerInstance.update(600000);
+    } else {
+      odometerInstance.update(100000);
+    }
+  }
 
 function animateStepOne(stepOne) {
     const stepOneTl = gsap.timeline({
@@ -304,21 +312,14 @@ function animateStepOne(stepOne) {
       });
 
       splideInstance.on("moved", function (newIndex, oldIndex, destIndex) {
-        if (newIndex === 0) {
-        if (!odometerInstance) {
-          odometerInstance = new Odometer({
-            el: document.querySelector(".odometer"), // Replace with your actual selector
-            value: 100000, // Set your initial value
-            format: ',ddd',
-            theme: 'default',
-          });
-          odometerInstance.render();
+         if (newIndex === 0) {
+          // Moved to the first slide
+          updateOdometerValue();
         } else {
-          // If Odometer instance exists, reset to the initial value
-          odometerInstance.update(100000);
+          // Moved away from the first slide
+          countDirection = -1; // Set direction to count down
+          updateOdometerValue();
         }
-      }
-       
       });
 
       splideInstance.on("active", function (slide) {
