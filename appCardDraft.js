@@ -20,23 +20,30 @@ function animateStepZero(stepZero) {
 
 odometer.update(600000);
 
-const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
-const gradientColors = ["#ff7bad", "#ff8e94", "#ff9e7e", "#ffac69", "#ffb45d", "#ffc940"]; // Add more colors as needed
+ // Apply gradient using pseudo-element
+  applyDigitGradient(odometerElement);
 
-digitSpans.forEach((span, index) => {
-    const gradientColor = gradientColors[index % gradientColors.length];
-    span.style.color = gradientColor;
-  });
-
-odometer.options.onAnimationEnd = function () {
-    digitSpans.forEach((span, index) => {
-      const gradientColor = gradientColors[index % gradientColors.length];
-      span.style.color = gradientColor;
-    });
-  };
-  
-  return odometer;
+  return odometer; // Return the odometer instance
 }
+
+function applyDigitGradient(odometerElement) {
+  const digitSpans = odometerElement.querySelectorAll(".odometer-digit span");
+
+  const gradientColors = ["#ff7bad", "#ff8e94", "#ff9e7e", "#ffac69", "#ffb45d", "#ffc940"];
+
+  digitSpans.forEach((span, index) => {
+    span.style.position = "relative";
+
+    // Create a pseudo-element for the gradient overlay
+    const pseudoElement = document.createElement("span");
+    pseudoElement.className = "gradient-overlay";
+    pseudoElement.style.background = `linear-gradient(to right, ${gradientColors.join(",")})`;
+    
+    // Append the pseudo-element to the span
+    span.appendChild(pseudoElement);
+  });
+}
+
 
 const stepZero = document.getElementById("stepZero");
 const odometerInstance = animateStepZero(stepZero);
