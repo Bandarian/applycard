@@ -35,7 +35,7 @@ $(document).ready(function () {
   animateStepTwo(stepTwo);
 
   function animateStepThree(stepThree) {
-    const coins = stepThree.querySelectorAll(".coin");
+    const coins = stepThree.querySelectorAll(".coin-apply");
     const stepThreeTl = gsap.timeline();
     stepThreeTl
       .from(coins, { y: -200, duration: 1, stagger: 0.05, ease: "bounce.out" })
