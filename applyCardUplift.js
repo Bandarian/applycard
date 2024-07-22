@@ -12,7 +12,7 @@ $(document).ready(function () {
   function animateStepZero(stepZero) {
     const stepZeroTl = gsap.timeline({ paused: true });
     stepZeroTl.fromTo(
-      ".apply-house-fade",
+      ".apply-house-fade-uplift",
       { opacity: "0%" },
       { opacity: "100%", duration: 1, stagger: 0.75, delay: 0.5 }
     );
